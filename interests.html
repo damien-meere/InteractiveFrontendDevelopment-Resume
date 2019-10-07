@@ -161,9 +161,42 @@
         </div>
     </footer>
 <script>
-    var APIKey = "AIzaSyD39FYxihKTllzwDeZ_VQ_8MrAbsEv_3Cw"
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 3,
+            center: {
+                lat: 46.619261,
+                lng: -33.134766
+            }
+        });
+
+        var labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        var locations = [
+            {lat: 40.785091, lng: -73.968285},
+            {lat: 41.084045, lng: -73.874245},
+            {lat: 40.754932, lng: -73.984016}
+        ];
+
+        // Add some markers to the map.
+        // Note: The code uses the JavaScript Array.prototype.map() method to
+        // create an array of markers based on a given "locations" array.
+        // The map() method here has nothing to do with the Google Maps API.
+        var markers = locations.map(function(location, i) {
+          return new google.maps.Marker({
+            position: location,
+            label: labels[i % labels.length]
+          });
+        });
+
+        // Add a marker clusterer to manage the markers.
+        var markerCluster = new MarkerClusterer(map, markers,
+            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+        }
+    }
 </script>
-
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAf4V93OS2w1blyeA4-8dPOnASBAmATNJI&callback=initMap"></script>
+<!-- async and defer don't have much effect when we're loading our scripts at the end of the body like this.
+But if we put our <script> tags in the <head>, then they would have improved the page loading time -->
 </body>
-
 </html>
