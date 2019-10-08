@@ -37,6 +37,9 @@ function repoInformationHTML(repos){
 }
 
 function fetchGitHubInformation(event) {
+    // Set both user and repo divs to blank at start to ensure they're always cleared
+    $("#gh-user-data").html("");
+    $("#gh-repo-data").html("");
 
     var username = $("#gh-username").val();
     if (!username) {
@@ -70,3 +73,5 @@ function fetchGitHubInformation(event) {
             }
         });
 }
+//THis line ensures we have the octocat profile displaying when the page is loaded, instead of just having an empty div
+$(document).ready(fetchGitHubInformation);
